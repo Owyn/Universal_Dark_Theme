@@ -159,9 +159,9 @@
 			+ "<br><br><input id='visitedColor' type='text' size='7'> Visited & hovered links color"
 			+ "<br><br><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
 			+ "<br><br><center><input id='active' type='checkbox'> Enabled for this website"
-			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"): <textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
-			+ "<br><br>Custom CSS style:<textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
-			+ "<br><br>Custom JS Action:<textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
+			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
+			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
+			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
 			+ "<br><input id='cfg_save' type='button' value='Save configuration'> <input id='cfg_close' type='button' value='Close'></center>";
 			document.body.appendChild(div);
 			document.getElementById("color").value = cfg_color;
