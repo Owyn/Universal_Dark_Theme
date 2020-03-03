@@ -1,7 +1,7 @@
 # Universal_Dark_Theme
 Browser userscript (extension) to apply a simple Dark Theme style for any website which you can configure per-site. 
 <br>
-Or a tool to make dark themes for websites using custom css and js in per-site script settings.
+Or a developer tool to make dark themes for websites using custom css and js in per-site script settings.
 
 <h4>One click to turn one dark theme style for a website - (hotkey `T` while menu is open)
 <br>
