@@ -26,8 +26,9 @@ There is no such thing as magic<br><img src="https://cdn.discordapp.com/emojis/3
 
 However simple one-click dark theme applicator (or a handy tool to craft dark themes - I noticed I was using the same CSS dark style for quite a lot of websites and decided to make this universal one instead) would be enough in many cases.
 
-Some website broken (especially if you use high-contrast windows theme) ? - one click:<br>
-<a href="https://ibb.co/mNVfg5W"><img src="https://i.ibb.co/mNVfg5W/borked.png" alt="borked" border="0"></a><<img src="https://i.ibb.co/XzNjpPh/f74d3003e8f46b56021e42c6515a831d-1.jpg" alt="f74d3003e8f46b56021e42c6515a831d-1" border="0"><a href="https://ibb.co/SKW0CnZ"><img src="https://i.ibb.co/SKW0CnZ/unborked.png" alt="unborked" border="0"></a>
+Is some website broken ? (especially if you use high-contrast windows theme) - no problem, just one click and:<br>
+
+<a href="https://ibb.co/BLwrLLv"><img src="https://i.ibb.co/BLwrLLv/borked.png" alt="borked" border="0"></a><img src="https://i.ibb.co/hs5W3VN/57116-1.png" border="0"><a href="https://ibb.co/YXk58SQ"><img src="https://i.ibb.co/YXk58SQ/unborked.png" alt="unborked" border="0"></a>
 
 <h3>how to bring back original color to an element (exclude css elements):</h3><br>
 <a href="https://ibb.co/1nCS5FD"><img src="https://i.ibb.co/1nCS5FD/how-to-bring-back-color.png" alt="how-to-bring-back-color" border="0"></a>
