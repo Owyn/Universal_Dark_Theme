@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme
 // @namespace	uni_dark_theme
-// @version		1.0
+// @version		1.1
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @supportURL	https://github.com/Owyn/Universal_Dark_Theme/issues
@@ -94,7 +94,7 @@
 			background: `+cfg_bgclr+` !important;
 			border-color: `+cfg_color+` !important;
 		}
-		a:visited, a:hover`+exc_txt+` {
+		:visited`+exc_txt+`, :hover`+exc_txt+` {
 			color: `+cfg_visclr+` !important;
 		}
 		`+cfg_css+`
@@ -157,8 +157,8 @@
 			+ "<br><br><input id='color' type='text' size='7'> Text color (empty = site default)"
 			+ "<br><br><input id='bgclr' type='text' size='7'> Background color"
 			+ "<br><br><input id='visitedColor' type='text' size='7'> Visited & hovered links color"
-			+ "<br><br><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
-			+ "<br><br><input id='active' type='checkbox'> Enabled for this website"
+			+ "<br><br><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
+			+ "<br><br><center><input id='active' type='checkbox'> Enabled for this website"
 			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
 			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
 			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
