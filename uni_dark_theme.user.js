@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme
 // @namespace	uni_dark_theme
-// @version		1.11
+// @version		1.12
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @supportURL	https://github.com/Owyn/Universal_Dark_Theme/issues
@@ -94,7 +94,7 @@
 			background: `+cfg_bgclr+` !important;
 			border-color: `+cfg_color+` !important;
 		}
-		:visited`+exc_txt+`, a:hover`+exc_txt+` {
+		:visited, a:hover`+exc_txt+` {
 			color: `+cfg_visclr+` !important;
 		}
 		`+cfg_css+`
@@ -151,18 +151,20 @@
 			div.style.margin = "5% -222px";
 			div.style.width = "444px";
 			div.style.border = "solid 1px black";
-			div.style.background = "silver";
+			div.style.backgroundColor = cfg_bgclr;
+			div.style.color = cfg_color;
 			div.style.zIndex = 8888888;
+			div.style.lineHeight = 1.0;
 			div.innerHTML = "<b><center>Configuration</center></b>"
-			+ "<br><br><input id='color' type='text' size='7'> Text color (empty = site default)"
-			+ "<br><br><input id='bgclr' type='text' size='7'> Background color"
-			+ "<br><br><input id='visitedColor' type='text' size='7'> Visited & hovered links color"
-			+ "<br><br><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
-			+ "<br><br><center><input id='active' type='checkbox'> Enabled for this website"
-			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
-			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
-			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both;'></textarea>"
-			+ "<br><input id='cfg_save' type='button' value='Save configuration'> <input id='cfg_close' type='button' value='Close'></center>";
+			+ "<br><br><input id='color' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> Text color (empty = site default)"
+			+ "<br><br><input id='bgclr' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> Background color"
+			+ "<br><br><input id='visitedColor' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> Visited & hovered links color"
+			+ "<br><br><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
+			+ "<br><br><input id='active' type='checkbox' style='display:inline; width:initial; padding: initial;'> Enabled for this website"
+			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial;'></textarea>"
+			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial;'></textarea>"
+			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial;'></textarea>"
+			+ "<br><input id='cfg_save' type='button' value='Save configuration'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> <input id='cfg_close' type='button' value='Close'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'></center>";
 			document.body.appendChild(div);
 			document.getElementById("color").value = cfg_color;
 			document.getElementById("bgclr").value = cfg_bgclr;
