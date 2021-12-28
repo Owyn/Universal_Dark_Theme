@@ -9,10 +9,10 @@ Or a developer tool to make dark themes for websites using custom css and js in 
 
 <h3>Configuration (per-site & global for colors)
 <br>
-<img src="https://images2.imgbox.com/87/76/hQJycoUI_o.png">
-  
+<img src="https://user-images.githubusercontent.com/1309656/147600205-9088037b-d2b2-4125-a054-85d498dbff3f.png">
+
 <h3>Supported browsers:</h3>
-<img src=https://upload.wikimedia.org/wikipedia/en/thumb/d/d0/Chrome_Logo.svg/90px-Chrome_Logo.svg.png> <img src=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Mozilla_Firefox_3.5_logo_256.png/90px-Mozilla_Firefox_3.5_logo_256.png>
+<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/180px-Google_Chrome_icon_%28September_2014%29.svg.png><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Mozilla_Firefox_3.5_logo_256.png/180px-Mozilla_Firefox_3.5_logo_256.png>
 
 <h3>Supported userscript managers:</h3>
 <a href="https://www.tampermonkey.net/"><img src=https://avatars2.githubusercontent.com/u/767504?s=120&v=4></a>
@@ -20,7 +20,7 @@ Or a developer tool to make dark themes for websites using custom css and js in 
 <h2><b>Important Notes:</b></h2>
 Userscript works well on simplemistic website designs with little color gradients and lack of shades used, because it makes all backgrounds into one background color and all text colors into one text color.
 
-Moreover not all website designs are competently done and might (and likely would) contain borked elements which would require hammering them out with your CSS (web style programming) knowledge. Or you could just look for a ready-to-use userstyle for that specific website on userstyles.org or in google with "website.com dark theme script" search and not bother.
+Moreover not all website designs are competently done and might (and likely would) contain broken elements which would require hammering them out with your CSS (web style programming) knowledge. Or you could just look for a ready-to-use userstyle for that specific website on userstyles.org or in google with "website.com dark theme script" search and not bother.
 
 There is no such thing as magic<br><img src="https://cdn.discordapp.com/emojis/369683046468681729.png">
 
@@ -32,3 +32,11 @@ Is some website broken ? (especially if you use high-contrast windows theme) - n
 
 <h3>how to bring back original color to an element (exclude css elements): - Click inspect element on it and</h3><br>
 <a href="https://ibb.co/1nCS5FD"><img src="https://i.ibb.co/1nCS5FD/how-to-bring-back-color.png" alt="how-to-bring-back-color" border="0"></a>
+
+see, inspected element there has `bell` class, so you just enter it as `.bell` (class "bell") into excludes list of the script config - OR \ AND - you could try enabling "keep background images" option for that website before and see if it'd unhide what you want (or even more than that so it'd look ugly :D - test yourself)
+
+<h3>other tips</h3>
+
+- to use just custom CSS \ JS on a site without changing any colors - just add `*` (asterix) into excludes
+
+- to get the cool golden dark theme you have seen on the screen above - just use color codes shown on the screenshot :-)
