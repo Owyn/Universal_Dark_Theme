@@ -37,6 +37,6 @@ see, inspected element there has `bell` class, so you just enter it as `.bell` (
 
 <h3>other tips</h3>
 
-- to use just custom CSS \ JS on a site without changing any colors - just add `*` (asterix) into excludes
+- to use just custom CSS \ JS on a site without changing any colors - just add `*` (asterix) into excludes to exclude literally everything
 
 - to get the cool golden dark theme you have seen on the screen above - just use color codes shown on the screenshot :-)
