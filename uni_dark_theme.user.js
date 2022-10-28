@@ -1,20 +1,21 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.14
+// @version		1.15
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
+// @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @supportURL	https://github.com/Owyn/Universal_Dark_Theme/issues
 // @homepage	https://github.com/Owyn/Universal_Dark_Theme
 // @icon		https://images2.imgbox.com/b3/67/Aq5XazuW_o.png
 // @author		Owyn
 // @match		*://*/*
-// @grant		GM_addStyle
 // @grant		GM_getValue
 // @grant		GM_setValue
 // @grant		GM_registerMenuCommand
+// @grant		unsafeWindow
+// @sandbox		JavaScript
 // @run-at		document-start
-// @noframes
 // ==/UserScript==
 
 (function() {
@@ -56,12 +57,11 @@
 
 	function activate(yes, prev_active)
 	{
-		if(prev_active && el){document.body.removeChild(el);}
+		if(prev_active && el){document.documentElement.removeChild(el);}
 		if(yes)
 		{
 			make_css();
-			el = GM_addStyle(css);
-			el = document.body.appendChild(el);
+			el = addStyle(css);
 			if(cfg_js){eval(cfg_js);}
 		}
 	}
@@ -114,13 +114,24 @@
 		//////////////
 	}
 
+	function addStyle (aCss)
+	{
+		let style = document.createElement('style');
+		style.setAttribute('type', 'text/css');
+		style.textContent = aCss;
+		document.documentElement.appendChild(style);
+		return style;
+	};
+
 	if(cfg_active)
 	{
-		console.warn("doing work");
+		console.info("adding dark style...");
 		load_settings();
 		make_css();
-		el = GM_addStyle(css);
-		document.addEventListener("DOMContentLoaded", function(){ el = document.body.appendChild(el); if(cfg_js){eval(cfg_js);} });
+		el = addStyle(css);
+		console.info(unsafeWindow);
+        console.info(el);
+		unsafeWindow.addEventListener("DOMContentLoaded", function(){ el = document.documentElement.appendChild(el); if(cfg_js){eval(cfg_js);} }); // make sure style element is at the bottom & execute custom JS
 	}
 
 	var t;
