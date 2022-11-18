@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.15
+// @version		1.16
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -131,7 +131,7 @@
 		el = addStyle(css);
 		console.info(unsafeWindow);
         console.info(el);
-		unsafeWindow.addEventListener("DOMContentLoaded", function(){ el = document.documentElement.appendChild(el); if(cfg_js){eval(cfg_js);} }); // make sure style element is at the bottom & execute custom JS
+		window.addEventListener("DOMContentLoaded", function(){ el = document.documentElement.appendChild(el); if(cfg_js){eval(cfg_js);} }); // make sure style element is at the bottom & execute custom JS
 	}
 
 	var t;
