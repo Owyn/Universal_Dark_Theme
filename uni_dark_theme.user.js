@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.16
+// @version		1.17
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -105,9 +105,13 @@
 			color: `+cfg_color+` !important;
 			background`+bgimg_txt+`: `+cfg_bgclr+` !important;
 			border-color: `+cfg_color+` !important;
+			color-scheme: dark;
 		}
 		:visited`+exc_txt+`, a:hover`+exc_txt+` {
 			color: `+cfg_visclr+` !important;
+		}
+		:focus`+exc_txt+`{
+			outline: 1px solid `+cfg_visclr+` !important;
 		}
 		`+cfg_css+`
 		`;
@@ -172,27 +176,18 @@
 			}
 			load_settings();
 			var div = document.createElement("div");
-			div.style.position = "fixed";
-			div.style.top = "5%";
-			div.style.left = "50%";
-			div.style.margin = "0px -222px";
-			div.style.width = "444px";
-			div.style.border = "solid 1px black";
-			div.style.backgroundColor = cfg_bgclr;
-			div.style.color = cfg_color;
-			div.style.zIndex = 8888888;
-			div.style.lineHeight = 1.0;
-			div.innerHTML = "<b><center>Configuration</center></b>"
-			+ "<br><br><input id='color' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> Text color (empty = site default)"
-			+ "<br><br><input id='bgclr' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> Background color"
-			+ "<br><br><input id='visitedColor' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> <span style=\"color: "+cfg_visclr+" !important\">Visited & hovered links color</span>"
-			+ "<br><br><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
-			+ "<br><br><input id='active' type='checkbox' style='display:inline; width:initial; padding: initial;'> Enabled for this website"
-			+ "<br><br><input id='bgimg' type='checkbox' style='display:inline; width:initial; padding: initial;'> Keep background-images"
-			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial;'></textarea>"
-			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial;'></textarea>"
-			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial;'></textarea>"
-			+ "<br><input id='cfg_save' type='button' value='Save configuration'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'> <input id='cfg_close' type='button' value='Close'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial;'></center>";
+			div.style = "margin: auto; width: fit-content; height: fit-content; border: 1px solid black; color: "+cfg_color+"; background: "+cfg_bgclr+"; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 8888888; line-height: 1;";
+			div.innerHTML = "<b><br><center>Configuration</center></b>"
+			+ "<div style='margin: auto; display: table;'><br><input id='color' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> Text color (empty = site default)"
+			+ "<br><br><input id='bgclr' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> Background color"
+			+ "<br><br><input id='visitedColor' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> <span style=\"color: "+cfg_visclr+" !important\">Visited & hovered links color</span>"
+			+ "<br><br></div><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
+			+ "<br><br><input id='active' type='checkbox' style='display:inline; width:initial; padding: initial; margin: initial;'> Enabled for this website"
+			+ "<br><br><input id='bgimg' type='checkbox' style='display:inline; width:initial; padding: initial; margin: initial;'> Keep background-images"
+			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial;'></textarea>"
+			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial;'></textarea>"
+			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial;'></textarea>"
+			+ "<br><input id='cfg_save' type='button' value='Save configuration'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> <input id='cfg_close' type='button' value='Close'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'></center>";
 			document.body.appendChild(div);
 			document.getElementById("color").value = cfg_color;
 			document.getElementById("bgclr").value = cfg_bgclr;
