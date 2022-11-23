@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.17
+// @version		1.18
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -110,7 +110,7 @@
 		:visited`+exc_txt+`, a:hover`+exc_txt+` {
 			color: `+cfg_visclr+` !important;
 		}
-		:focus`+exc_txt+`{
+		input:focus,textarea:focus,select:focus`+exc_txt+`{
 			outline: 1px solid `+cfg_visclr+` !important;
 		}
 		`+cfg_css+`
