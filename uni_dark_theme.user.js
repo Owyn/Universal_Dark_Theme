@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.18
+// @version		1.19
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -12,6 +12,7 @@
 // @match		*://*/*
 // @grant		GM_getValue
 // @grant		GM_setValue
+// @grant		GM_addElement
 // @grant		GM_registerMenuCommand
 // @grant		unsafeWindow
 // @sandbox		JavaScript
@@ -57,11 +58,13 @@
 
 	function activate(yes, prev_active)
 	{
-		if(prev_active && el){document.documentElement.removeChild(el);}
+		if(prev_active && el){console.info("Removing dark style..."); el.remove();}
 		if(yes)
 		{
 			make_css();
+			console.info("adding dark style...");
 			el = addStyle(css);
+			console.info(el);
 			if(cfg_js){eval(cfg_js);}
 		}
 	}
@@ -118,18 +121,19 @@
 		//////////////
 	}
 
-	function addStyle (aCss)
+	function addStyle(aCss)
 	{
-		let style = document.createElement('style');
+		return GM_addElement(document.documentElement, 'style', {textContent: aCss});
+		/*let style = document.createElement('style');
 		style.setAttribute('type', 'text/css');
 		style.textContent = aCss;
 		document.documentElement.appendChild(style);
-		return style;
+		return style;*/
 	};
 
 	if(cfg_active)
 	{
-		console.info("adding dark style...");
+		console.info("Adding dark style...");
 		load_settings();
 		make_css();
 		el = addStyle(css);
@@ -180,13 +184,13 @@
 			div.innerHTML = "<b><br><center>Configuration</center></b>"
 			+ "<div style='margin: auto; display: table;'><br><input id='color' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> Text color (empty = site default)"
 			+ "<br><br><input id='bgclr' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> Background color"
-			+ "<br><br><input id='visitedColor' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> <span style=\"color: "+cfg_visclr+" !important\">Visited & hovered links color</span>"
+			+ "<br><br><input id='visitedColor' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> <a href='' onclick='return false;'>Visited & hovered links color</a>"
 			+ "<br><br></div><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
 			+ "<br><br><input id='active' type='checkbox' style='display:inline; width:initial; padding: initial; margin: initial;'> Enabled for this website"
 			+ "<br><br><input id='bgimg' type='checkbox' style='display:inline; width:initial; padding: initial; margin: initial;'> Keep background-images"
-			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial;'></textarea>"
-			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial;'></textarea>"
-			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial;'></textarea>"
+			+ "<br><br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial; min-height: initial;'></textarea>"
+			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial; min-height: initial;'></textarea>"
+			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial; min-height: initial;'></textarea>"
 			+ "<br><input id='cfg_save' type='button' value='Save configuration'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> <input id='cfg_close' type='button' value='Close'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'></center>";
 			document.body.appendChild(div);
 			document.getElementById("color").value = cfg_color;
