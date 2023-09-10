@@ -1,4 +1,4 @@
-# Contributing to Universal_Dark_Theme for eBay
+# Contributing to Universal_Dark_Theme
 
 ## Getting Started
 
