@@ -1,7 +1,7 @@
 <h1>Universal Dark Theme Maker</h1>
 Browser userscript (extension) to apply a simple Dark Theme style for any website which you can configure per-site. 
 <br>
-Or a developer tool to make dark themes for websites using custom css and js in per-site script settings.
+Or a developer tool to create dark themes for websites using custom css and js in per-site script settings.
 
 <h4>One click to turn one dark theme style for a website - (hotkey `T` while menu is open)
 <br>
@@ -9,10 +9,10 @@ Or a developer tool to make dark themes for websites using custom css and js in 
 
 <h3>Configuration (per-site & global for colors)
 <br>
-<img src="https://user-images.githubusercontent.com/1309656/147600205-9088037b-d2b2-4125-a054-85d498dbff3f.png">
+<img src="https://github.com/Owyn/Universal_Dark_Theme/assets/1309656/f5d60f79-74fc-4ecc-9d88-3886cf6075c3">
 
 <h3>Supported browsers:</h3>
-<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/180px-Google_Chrome_icon_%28September_2014%29.svg.png><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Mozilla_Firefox_3.5_logo_256.png/180px-Mozilla_Firefox_3.5_logo_256.png>
+<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/180px-Google_Chrome_icon_%28September_2014%29.svg.png><img src=https://github.com/Owyn/Universal_Dark_Theme/assets/1309656/0d2c7e4a-4038-4c06-96a8-505a36c9d625>
 
 <h3>Supported userscript managers:</h3>
 <a href="https://www.tampermonkey.net/"><img src=https://avatars2.githubusercontent.com/u/767504?s=120&v=4></a>
@@ -39,4 +39,8 @@ see, inspected element there has `bell` class, so you just enter it as `.bell` (
 
 - to use just custom CSS \ JS on a site without changing any colors - just add `*` (asterix) into excludes to exclude literally everything
 
-- to get the cool golden dark theme you have seen on the screen above - just use color codes shown on the screenshot :-)
+- to get the green dark theme you have seen on the screen above - just use those color codes shown on the screenshot above :-)
+
+- or use a cool golden one from this old screenshot below:
+<img src="https://user-images.githubusercontent.com/1309656/147600205-9088037b-d2b2-4125-a054-85d498dbff3f.png">
+
