@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.30
+// @version		1.31
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -199,20 +199,21 @@
 			}
 			load_settings();
 			var div = document.createElement("div");
-			div.style = "margin: auto; width: fit-content; height: fit-content; border: 1px solid black; color: "+cfg_color+"; background: "+cfg_bgclr+" !important; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 8888888; line-height: 1;";
+			div.style = "all:revert; margin: auto; width: fit-content; height: fit-content; border: 1px solid black; color: "+cfg_color+"; !important; background: "+cfg_bgclr+" !important; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 2147483647; line-height: 1;";
 			div.innerHTML = "<b><br><center>Configuration</center></b>"
-			+ "<div style='margin: auto; display: table;'><br><input id='color' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> Text color (empty = site default)"
-			+ "<br><br><input id='bgclr' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> Background color"
-			+ "<br><br><input id='visitedColor' type='text' size='7' style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> <a href='' onclick='return false;'>Visited & hovered links color</a>"
+			+ "<div style='margin: auto; display: table;'>"
+			+ "<br><input id='color' type='text' size='7' style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial; margin:2px;'> Text color (empty = site default)"
+			+ "<br><input id='bgclr' type='text' size='7' style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial; margin:2px;'> Background color"
+			+ "<br><input id='visitedColor' type='text' size='7' style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial; margin:2px;'> <a href='' onclick='return false;'>Visited & hovered links color</a>"
 			+ "<br><br></div><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
-			+ "<table><tr style='padding:1px'><td style='padding:1px'><input id='active' type='checkbox' style='display:inline; appearance: auto; width:initial; padding: initial; margin: initial;'> Enabled for this website"
-			+ "</td><td style='padding:1px'><input id='match_pseudo' type='checkbox' style='display:inline; appearance: auto; width:initial; padding: initial; margin: initial;'> Also color pseudo-elements"
-			+ "</td></tr><br><br><tr style='padding:1px'><td style='padding:1px'><input id='bgimg' type='checkbox' style='display:inline; appearance: auto; width:initial; padding: initial; margin: initial;'> Keep background-images"
-			+ "</td><td style='padding:1px'><input id='bgtrans' type='checkbox' style='display:inline; appearance: auto; width:initial; padding: initial; margin: initial;'> Make background transparent </td></tr></table>" 
-			+ "<br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial; min-height: initial;'></textarea>"
-			+ "<br><br>Custom CSS style:<br><textarea id='css' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial; min-height: initial;'></textarea>"
-			+ "<br><br>Custom JS Action:<br><textarea id='js' style='margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; display:inline; padding: initial; margin: initial; min-height: initial;'></textarea>"
-			+ "<br><input id='cfg_save' type='button' value='Save configuration'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'> <input id='cfg_close' type='button' value='Close'  style='display:inline; color: "+cfg_color+"; background-color: "+cfg_bgclr+"; width:initial; padding: initial; margin: initial;'></center>";
+			+ "<table style='all:revert;'><tr style='all:revert; padding:1px'><td style='all:revert; padding:1px'><input id='active' type='checkbox' style='all:revert;margin:initial;'> Enabled for this website"
+			+ "</td><td style='all:revert; padding:1px'><input id='match_pseudo' type='checkbox' style='all:revert;margin:initial;'> Also color pseudo-elements"
+			+ "</td></tr><br><br><tr style='all:revert; padding:1px'><td style='all:revert; padding:1px'><input id='bgimg' type='checkbox' style='all:revert;margin:initial;'> Keep background-images"
+			+ "</td><td style='all:revert; padding:1px'><input id='bgtrans' type='checkbox' style='all:revert;margin:initial;'> Make background transparent </td></tr></table>" 
+			+ "<br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='all:revert;margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial;'></textarea>"
+			+ "<br><br>Custom CSS style:<br><textarea id='css' style='all:revert; margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial;'></textarea>"
+			+ "<br><br>Custom JS Action:<br><textarea id='js' style='all:revert; margin: 0px; width: 400px; height: 50px; resize:both; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial;'></textarea>"
+			+ "<br><input id='cfg_save' type='button' value='Save configuration'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important;'> <input id='cfg_close' type='button' value='Close'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial;'></center>";
 			document.body.appendChild(div);
 			document.getElementById("color").value = cfg_color;
 			document.getElementById("bgclr").value = cfg_bgclr;
