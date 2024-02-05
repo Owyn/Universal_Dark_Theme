@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.32
+// @version		1.33
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -167,6 +167,7 @@
 	}
 
 	var t;
+	var div;
 	function cfg()
 	{
 		function saveCfg()
@@ -182,9 +183,9 @@
 			localStorage.setItem('bgimg', document.getElementById("bgimg").checked ? "1" : "0");
 			localStorage.setItem('bgtrans', document.getElementById("bgtrans").checked ? "1" : "0");
 			// pretty text "saved"
-			document.getElementById("cfg_save").value = "SAVED !";
+			document.getElementById("cfg_save").value = "SAVED OK";
 			clearTimeout(t);
-			t = setTimeout(function() {document.getElementById("cfg_save").value = "Save configuration";},1500)
+			t = setTimeout(function() {document.getElementById("cfg_save").value = "Save config";},1500)
 			// update active configuration
 			cfg_color = document.getElementById("color").value;
 			cfg_bgclr = document.getElementById("bgclr").value;
@@ -206,9 +207,14 @@
 			if(!document.getElementById("css").value) { localStorage.removeItem('css'); }
 			if(!document.getElementById("js").value) { localStorage.removeItem('js'); }
 		}
+		if(div)
+		{
+			if(!div.isConnected) document.body.appendChild(div);
+			return;
+		}
 		load_settings();
-		var div = document.createElement("div");
-		div.style = "all:revert; margin: auto !important; width: fit-content !important; height: fit-content !important; border: 1px solid black; color: "+cfg_color+"; !important; background: "+cfg_bgclr+" !important; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 2147483647; line-height: 1 !important;";
+		div = document.createElement("div");
+		div.style = "all:revert; margin: auto !important; width: fit-content !important; height: fit-content !important; border: 1px solid "+cfg_color+"; color: "+cfg_color+"; !important; background: "+cfg_bgclr+" !important; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 2147483647; line-height: 1 !important;";
 		div.innerHTML = "<b><br><center>Configuration</center></b>"
 		+ "<div style='margin: auto; display: table;'>"
 		+ "<br><input id='color' type='text' size='7' style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important; margin:2px !important;'> Text color (empty = site default)"
@@ -218,11 +224,11 @@
 		+ "<table style='all:revert;'><tr style='all:revert; padding:1px !important;'><td style='all:revert; padding:1px !important;'><input id='active' type='checkbox' style='all:revert; margin:initial !important;'> Enabled for this website"
 		+ "</td><td style='all:revert; padding:1px !important;'><input id='match_pseudo' type='checkbox' style='all:revert; margin:initial !important;'> Also color pseudo-elements"
 		+ "</td></tr><br><br><tr style='all:revert; padding:1px !important;'><td style='all:revert; padding:1px !important;'><input id='bgimg' type='checkbox' style='all:revert; margin:initial !important;'> Keep background-images"
-		+ "</td><td style='all:revert; padding:1px !important;'><input id='bgtrans' type='checkbox' style='all:revert; margin:initial !important;'> Make background transparent </td></tr></table>" 
-		+ "<br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='all:revert; margin: 0px; width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
-		+ "<br><br>Custom CSS style:<br><textarea id='css' style='all:revert; margin: 0px; width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
-		+ "<br><br>Custom JS Action:<br><textarea id='js' style='all:revert; margin: 0px; width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
-		+ "<br><input id='cfg_save' type='button' value='Save configuration'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important;'> <input id='cfg_close' type='button' value='Close'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></center>";
+		+ "</td><td style='all:revert; padding:1px !important;'><input id='bgtrans' type='checkbox' style='all:revert; margin:initial !important;'> Make background transparent </td></tr></table>"
+		+ "<br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='all:revert; margin: 0px; min-width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
+		+ "<br><br>Custom CSS style:<br><textarea id='css' style='all:revert; margin: 0px; min-width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
+		+ "<br><br>Custom JS Action:<br><textarea id='js' style='all:revert; margin: 0px; min-width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
+		+ "<br><input id='cfg_save' type='button' value='Save config'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important;'> <input id='cfg_close' type='button' value='Close'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></center>";
 		document.body.appendChild(div);
 		document.getElementById("color").value = cfg_color;
 		document.getElementById("bgclr").value = cfg_bgclr;
