@@ -44,3 +44,8 @@ see, inspected element there has `bell` class, so you just enter it as `.bell` (
 - or use a cool golden one from this old screenshot below:
 <img src="https://user-images.githubusercontent.com/1309656/147600205-9088037b-d2b2-4125-a054-85d498dbff3f.png">
 
+
+Just make sure there is enough contrast between the text and background colors,
+it should be at least 7:1 to read normal-sized text comfortably according to WCAG Level AAA standard, use this online checker: https://webaim.org/resources/contrastchecker/ 
+<img src="https://github.com/Owyn/Universal_Dark_Theme/assets/1309656/9cf172ab-407f-46a9-ad5a-fc5b731f7407">
+
