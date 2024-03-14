@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.33
+// @version		1.34
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -16,6 +16,8 @@
 // @grant		GM_registerMenuCommand
 // @grant		unsafeWindow
 // @sandbox		JavaScript
+// @compatible	Chrome
+// @compatible	Firefox
 // @run-at		document-start
 // ==/UserScript==
 
@@ -134,7 +136,7 @@
 		console.debug(unsafeWindow);
         console.debug(el);
 		window.addEventListener("DOMContentLoaded", function(){
-			if (document.documentElement.firstElementChild === el) // very fast browser
+			if (document.documentElement.lastElementChild !== el && el.parentNode === document.documentElement) // very fast browser
 			{
 				while (document.documentElement.lastElementChild !== el)
 				{
@@ -170,79 +172,106 @@
 	var div;
 	function cfg()
 	{
+		function updateCfgDivColors()
+		{
+			div.style.setProperty('--cfg_color', cfg_color);
+			div.style.setProperty('--cfg_bgclr', cfg_bgclr);
+			div.style.setProperty('--cfg_visclr', cfg_visclr);
+		}
 		function saveCfg()
 		{
-			GM_setValue("Color", document.getElementById("color").value);
-			GM_setValue("bgColor", document.getElementById("bgclr").value);
-			GM_setValue("visitedColor", document.getElementById("visitedColor").value);
-			localStorage.setItem('excl', document.getElementById("excl").value);
-			localStorage.setItem('css', document.getElementById("css").value);
-			localStorage.setItem('js', document.getElementById("js").value);
-			localStorage.setItem('active', document.getElementById("active").checked ? "1" : "0");
-			localStorage.setItem('match_pseudo', document.getElementById("match_pseudo").checked ? "1" : "0");
-			localStorage.setItem('bgimg', document.getElementById("bgimg").checked ? "1" : "0");
-			localStorage.setItem('bgtrans', document.getElementById("bgtrans").checked ? "1" : "0");
+			GM_setValue("Color", id("color").value);
+			GM_setValue("bgColor", id("bgclr").value);
+			GM_setValue("visitedColor", id("visitedColor").value);
+			localStorage.setItem('excl', id("excl").value);
+			localStorage.setItem('css', id("css").value);
+			localStorage.setItem('js', id("js").value);
+			localStorage.setItem('active', id("active").checked ? "1" : "0");
+			localStorage.setItem('match_pseudo', id("match_pseudo").checked ? "1" : "0");
+			localStorage.setItem('bgimg', id("bgimg").checked ? "1" : "0");
+			localStorage.setItem('bgtrans', id("bgtrans").checked ? "1" : "0");
 			// pretty text "saved"
-			document.getElementById("cfg_save").value = "SAVED OK";
+			id("cfg_save").value = "SAVED OK";
 			clearTimeout(t);
-			t = setTimeout(function() {document.getElementById("cfg_save").value = "Save config";},1500)
+			t = setTimeout(function() {id("cfg_save").value = "Save config";},1500)
 			// update active configuration
-			cfg_color = document.getElementById("color").value;
-			cfg_bgclr = document.getElementById("bgclr").value;
-			cfg_bgimg = document.getElementById("bgimg").checked;
-			cfg_bgtrans = document.getElementById("bgtrans").checked;
-			cfg_match_pseudo = document.getElementById("match_pseudo").checked;
-			cfg_visclr = document.getElementById("visitedColor").value;
-			cfg_excl = document.getElementById("excl").value;
-			cfg_css = document.getElementById("css").value;
-			cfg_js = document.getElementById("js").value;
-			activate(document.getElementById("active").checked, cfg_active );
-			cfg_active = document.getElementById("active").checked;
+			cfg_color = id("color").value;
+			cfg_bgclr = id("bgclr").value;
+			cfg_bgimg = id("bgimg").checked;
+			cfg_bgtrans = id("bgtrans").checked;
+			cfg_match_pseudo = id("match_pseudo").checked;
+			cfg_visclr = id("visitedColor").value;
+			cfg_excl = id("excl").value;
+			cfg_css = id("css").value;
+			cfg_js = id("js").value;
+			activate(id("active").checked, cfg_active );
+			cfg_active = id("active").checked;
+			//
+			updateCfgDivColors();
 			// clean up
-			if(!document.getElementById("active").checked) { localStorage.removeItem('active'); }
-			if(!document.getElementById("match_pseudo").checked) { localStorage.removeItem('match_pseudo'); }
-			if(!document.getElementById("bgimg").checked) { localStorage.removeItem('bgimg'); }
-			if(!document.getElementById("bgtrans").checked) { localStorage.removeItem('bgtrans'); }
-			if(!document.getElementById("excl").value) { localStorage.removeItem('excl'); }
-			if(!document.getElementById("css").value) { localStorage.removeItem('css'); }
-			if(!document.getElementById("js").value) { localStorage.removeItem('js'); }
+			if(!id("active").checked) { localStorage.removeItem('active'); }
+			if(!id("match_pseudo").checked) { localStorage.removeItem('match_pseudo'); }
+			if(!id("bgimg").checked) { localStorage.removeItem('bgimg'); }
+			if(!id("bgtrans").checked) { localStorage.removeItem('bgtrans'); }
+			if(!id("excl").value) { localStorage.removeItem('excl'); }
+			if(!id("css").value) { localStorage.removeItem('css'); }
+			if(!id("js").value) { localStorage.removeItem('js'); }
 		}
 		if(div)
 		{
-			if(!div.isConnected) document.body.appendChild(div);
-			return;
+			if(!div.isConnected) document.body.appendChild(div); // it was there but got closed
+			return; // div already built
 		}
 		load_settings();
 		div = document.createElement("div");
-		div.style = "all:revert; margin: auto !important; width: fit-content !important; height: fit-content !important; border: 1px solid "+cfg_color+"; color: "+cfg_color+"; !important; background: "+cfg_bgclr+" !important; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 2147483647; line-height: 1 !important;";
-		div.innerHTML = "<b><br><center>Configuration</center></b>"
-		+ "<div style='margin: auto; display: table;'>"
-		+ "<br><input id='color' type='text' size='7' style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important; margin:2px !important;'> Text color (empty = site default)"
-		+ "<br><input id='bgclr' type='text' size='7' style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important; margin:2px !important;'> Background color"
-		+ "<br><input id='visitedColor' type='text' size='7' style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important; margin:2px !important;'> <a href='' onclick='return false;'>Visited & hovered links color</a>"
-		+ "<br><br></div><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>"
-		+ "<table style='all:revert;'><tr style='all:revert; padding:1px !important;'><td style='all:revert; padding:1px !important;'><input id='active' type='checkbox' style='all:revert; margin:initial !important;'> Enabled for this website"
-		+ "</td><td style='all:revert; padding:1px !important;'><input id='match_pseudo' type='checkbox' style='all:revert; margin:initial !important;'> Also color pseudo-elements"
-		+ "</td></tr><br><br><tr style='all:revert; padding:1px !important;'><td style='all:revert; padding:1px !important;'><input id='bgimg' type='checkbox' style='all:revert; margin:initial !important;'> Keep background-images"
-		+ "</td><td style='all:revert; padding:1px !important;'><input id='bgtrans' type='checkbox' style='all:revert; margin:initial !important;'> Make background transparent </td></tr></table>"
-		+ "<br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl' style='all:revert; margin: 0px; min-width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
-		+ "<br><br>Custom CSS style:<br><textarea id='css' style='all:revert; margin: 0px; min-width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
-		+ "<br><br>Custom JS Action:<br><textarea id='js' style='all:revert; margin: 0px; min-width: 400px; height: 50px; resize:both !important; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></textarea>"
-		+ "<br><input id='cfg_save' type='button' value='Save config'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important;'> <input id='cfg_close' type='button' value='Close'  style='all:revert; color: "+cfg_color+" !important; background-color: "+cfg_bgclr+" !important; padding:initial !important;'></center>";
+		div.style = "all: initial !important; margin: auto !important; width: fit-content !important; height: fit-content !important; border: 1px solid var(--cfg_color) !important; background: var(--cfg_bgclr) !important; position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; line-height: 1 !important;"; // all:initial to disable CSS inheritance
+		div.attachShadow({mode: 'open'}); // outer CSS selectors won't affect it now (but we will still inherit styles) // we could use an iframe but extensions might block it? <iframe src='data:text/html,<strong>Hello World!</strong>'></iframe>
+		const id = div.shadowRoot.getElementById.bind(div.shadowRoot);
+		let shadowStyle = `* {
+			color-scheme: dark; 
+			color: var(--cfg_color);
+			background: var(--cfg_bgclr);
+			border-color: var(--cfg_color);
+			padding: initial; margin: initial;
+		}
+		:visited, a:hover { color: var(--cfg_visclr); }
+		input:focus,textarea:focus,select:focus { outline: 2px solid var(--cfg_visclr); }
+		tr,td { padding:1px; }
+		input { padding:0px 3px; }
+		input[type='checkbox'] { padding: 0px; }
+		div { margin: auto; display: table; }
+		div > input { margin:2px; width: 6em; }
+		textarea { margin: 0px; min-width: 400px; height: 50px; resize:both; }`;
+		div.shadowRoot.innerHTML = `<b><br><center>Configuration</center></b>
+		<div>
+		<br><input id='color' type='text'> Text color (empty = site default)
+		<br><input id='bgclr' type='text'> Background color
+		<br><input id='visitedColor' type='text'>&nbsp;<a href='' onclick='return false;'>Visited & hovered link color</a>
+		<br><br></div><center><b>Per-site settings (stored in browser cookies called LocalStorage):</b>
+		<table><tr><td><input id='active' type='checkbox'> Enabled for this website
+		</td><td><input id='match_pseudo' type='checkbox'> Also color pseudo-elements
+		</td></tr><br><br><tr><td><input id='bgimg' type='checkbox'> Keep background-images
+		</td><td><input id='bgtrans' type='checkbox'> Make background transparent </td></tr></table>
+		<br>Excluded css elements (e.g. \"#id1,.class2,input\"):<br><textarea id='excl'></textarea>
+		<br><br>Custom CSS style:<br><textarea id='css'></textarea>
+		<br><br>Custom JS Action:<br><textarea id='js'></textarea>
+		<br><input id='cfg_save' type='button' value='Save config'> <input id='cfg_close' type='button' value='Close'></center>`;
 		document.body.appendChild(div);
-		document.getElementById("color").value = cfg_color;
-		document.getElementById("bgclr").value = cfg_bgclr;
-		document.getElementById("bgimg").checked = cfg_bgimg;
-		document.getElementById("bgtrans").checked = cfg_bgtrans;
-		document.getElementById("visitedColor").value = cfg_visclr;
+		GM_addElement(div.shadowRoot, 'style', {textContent: shadowStyle}); // damn CSP gets us even in our own shadow...
+		updateCfgDivColors();
+		id("color").value = cfg_color;
+		id("bgclr").value = cfg_bgclr;
+		id("bgimg").checked = cfg_bgimg;
+		id("bgtrans").checked = cfg_bgtrans;
+		id("visitedColor").value = cfg_visclr;
 		//
-		document.getElementById("active").checked = cfg_active;
-		document.getElementById("match_pseudo").checked = cfg_match_pseudo;
-		document.getElementById("excl").value = cfg_excl;
-		document.getElementById("css").value = cfg_css;
-		document.getElementById("js").value = cfg_js;
-		document.getElementById("cfg_save").addEventListener("click", saveCfg, true);
-		document.getElementById("cfg_close").addEventListener("click", function(){div.remove();clearTimeout(t);}, true);
+		id("active").checked = cfg_active;
+		id("match_pseudo").checked = cfg_match_pseudo;
+		id("excl").value = cfg_excl;
+		id("css").value = cfg_css;
+		id("js").value = cfg_js;
+		id("cfg_save").addEventListener("click", saveCfg, true);
+		id("cfg_close").addEventListener("click", () => div.remove(), true);
 	}
 
 })();
