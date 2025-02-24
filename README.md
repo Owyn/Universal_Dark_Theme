@@ -17,6 +17,15 @@ Or a developer tool to create dark themes for websites using custom css and js i
 <h3>Supported userscript managers:</h3>
 <a href="https://www.tampermonkey.net/"><img src=https://avatars2.githubusercontent.com/u/767504?s=120&v=4></a>
 
+<h3>Reducing flickering:</h3> 
+(sometimes it happens when the site loads in white and then it lags and then the script turns it dark)
+to reduce it - go to TamperMonkey's dashboard and then to this script's settings (click the script, then its settings tab) and choose its run position to be the 1st  
+<br>
+<img src=https://github.com/user-attachments/assets/c46f5d29-1545-4819-abfb-544b6bcf28bd>
+
+
+
+
 <h2><b>Important Notes:</b></h2>
 Userscript works well on simplemistic website designs with little color gradients and lack of shades used, because it makes all backgrounds into one background color and all text colors into one text color.
 
