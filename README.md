@@ -17,12 +17,11 @@ Or a developer tool to create dark themes for websites using custom css and js i
 <h3>Supported userscript managers:</h3>
 <a href="https://www.tampermonkey.net/"><img src=https://avatars2.githubusercontent.com/u/767504?s=120&v=4></a>
 
-<h3>Reducing flickering:</h3> 
+<h3>How to stop flickering:</h3> 
 (sometimes it happens when the site loads in white and then it lags and then the script turns it dark)
-to reduce it - go to TamperMonkey's dashboard and then to this script's settings (click the script, then its settings tab) and choose its run position to be the 1st  
+that is because userscripts are loaded in "lazy mode" asynchroniously by default, to guarantee that they are loaded exactly when expected - go to TamperMonkey's dashboard -> settings -> inject mode: instant
 <br>
-<img src=https://github.com/user-attachments/assets/c46f5d29-1545-4819-abfb-544b6bcf28bd>
-
+<img src=https://github.com/user-attachments/assets/3b7e1a9c-45aa-4a5e-b7a4-9f886d67774b>
 
 
 
