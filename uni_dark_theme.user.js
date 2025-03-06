@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.4
+// @version		1.41
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -28,9 +28,9 @@
 	var css;
 	var cfg_color = "#c0c0c0";
 	var cfg_bgclr = "#2e2e2e";
+	var cfg_visclr = "#a4a4a4";
 	var cfg_bgimg;
 	var cfg_bgtrans;
-	var cfg_visclr = "#a4a4a4";
 	var cfg_excl;
 	var cfg_css;
 	var cfg_js;
@@ -64,12 +64,23 @@
 				GM.getValue("bgColor", "#2e2e2e").then( function(result) { cfg_bgclr = result; } , console.error),
 				GM.getValue("visitedColor", "#a4a4a4").then( function(result) { cfg_visclr = result; } , console.error)
 			]).then(
-				function() { console.debug("UDT: GM settings loaded"); updateHTMLColorVars(); },
+				function() { console.debug("UDT: GM settings loaded"); updateHTMLColorVars(); observer.observe(document.documentElement, {attributeFilter: ["style"]}); },
 				function(error) { console.error("UDT: GM settings NOT loaded: " + error); }
 				);
 		}
 		return done
     }
+
+	var observer = new MutationObserver((mutations) => {
+		for (const m of mutations)
+		{
+			if(cfg_active && m.target.style.getPropertyValue('--cfg_visclr') === "")
+			{
+				updateHTMLColorVars();
+				console.debug("UDT: color vars lost, reAdding...");
+			}
+		}
+	});
 
 	function updateHTMLColorVars()
 	{
@@ -80,11 +91,11 @@
 
 	function activate(yes, prev_active)
 	{
-		if(prev_active && el){console.debug("Removing dark style..."); el.remove();}
+		if(prev_active && el){console.debug("UDT: Removing dark style..."); el.remove();}
 		if(yes)
 		{
 			make_css();
-			console.debug("adding dark style...");
+			console.debug("UDT: adding dark style...");
 			el = GM_addElement(document.documentElement, 'style', {textContent: css});
 			console.debug(el);
 			if(cfg_js){eval(cfg_js);}
@@ -101,6 +112,7 @@
 		else
 		{
 			localStorage.setItem('active', "1");
+			updateHTMLColorVars();
 		}
 	}
 
@@ -117,7 +129,7 @@
 			}
 		}
 		let bgimg_txt = cfg_bgimg ? "-color" : "";
-        let match_pseudo = cfg_match_pseudo ? (",*"+exc_txt+"::before"+",*"+exc_txt+"::after") : "";
+        let match_pseudo = cfg_match_pseudo ? (",*"+exc_txt+"::before,*"+exc_txt+"::after") : "";
 		////////////// Main thing, the style!:
 		css = (cfg_excl !== "*" ?(cfg_bgtrans ?`
 		:root`+exc_txt+` {
@@ -146,11 +158,12 @@
 
 	if(cfg_active)
 	{
-		console.debug("Adding dark style...");
+		console.debug("UDT: Adding dark style...");
 		make_css();
 		el = GM_addElement(document.documentElement, 'style', {textContent: css});
 		console.debug(unsafeWindow);
         console.debug(el);
+		updateHTMLColorVars(); // placeholder colors while GM settings are still loading
 		window.addEventListener("DOMContentLoaded", function(){
 			if (document.documentElement.lastElementChild !== el && el.parentNode === document.documentElement) // very fast browser
 			{
@@ -158,7 +171,7 @@
 				{
 					document.documentElement.prepend(document.documentElement.lastElementChild);
 				}
-				console.debug("moved dark style to the bottom"); // actually not, cuz security restrictions
+				console.debug("UDT: moved dark style to the bottom"); // actually not, cuz security restrictions
 			}
 			if (cfg_js)
 			{
