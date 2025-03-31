@@ -19,9 +19,10 @@ Or a developer tool to create dark themes for websites using custom css and js i
 
 <h3>How to stop flickering:</h3> 
 (sometimes it happens when the site loads in white and then it lags and then the script turns it dark)
-that is because userscripts are loaded in "lazy mode" asynchroniously by default, to guarantee that they are loaded exactly when expected - go to TamperMonkey's dashboard -> settings -> inject mode: instant
+that is because userscripts are loaded in "lazy mode" asynchroniously by default, to guarantee that they are loaded exactly when expected - go to TamperMonkey's dashboard -> settings -> Content Script API: dynamic
 <br>
-<img src=https://github.com/user-attachments/assets/3b7e1a9c-45aa-4a5e-b7a4-9f886d67774b>
+<img src=https://github.com/user-attachments/assets/b717afe5-e453-4015-b0b8-498f39096705>
+
 
 
 
