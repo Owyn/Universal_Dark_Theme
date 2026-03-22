@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		Universal Dark Theme Maker
 // @namespace	uni_dark_theme
-// @version		1.41
+// @version		1.42
 // @description	Simple Dark Theme style for any website which you can configure per-site
 // @downloadURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
 // @updateURL	https://github.com/Owyn/Universal_Dark_Theme/raw/master/uni_dark_theme.user.js
@@ -297,6 +297,7 @@
 		id("js").value = cfg_js;
 		id("cfg_save").addEventListener("click", saveCfg, true);
 		id("cfg_close").addEventListener("click", () => div.remove(), true);
+		div.addEventListener("keydown", (e) => e.stopPropagation());
 	}
 
 })();
