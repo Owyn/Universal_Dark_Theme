@@ -5,14 +5,17 @@ Or a developer tool to create dark themes for websites using custom css and js i
 
 <h4>One click to turn one dark theme style for a website - (hotkey `T` while menu is open)
 <br>
-<img src="https://images2.imgbox.com/2c/dd/QrjeXsVA_o.png">
+<img width="1100" height="300" src="https://github.com/user-attachments/assets/819347a7-c4f3-42f3-bb85-4125a61901b2" />
+
+
 
 <h3>Configuration (per-site & global for colors)
 <br>
 <img src="https://github.com/Owyn/Universal_Dark_Theme/assets/1309656/f5d60f79-74fc-4ecc-9d88-3886cf6075c3">
 
 <h3>Supported browsers:</h3>
-<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/180px-Google_Chrome_icon_%28September_2014%29.svg.png><img src=https://github.com/Owyn/Universal_Dark_Theme/assets/1309656/0d2c7e4a-4038-4c06-96a8-505a36c9d625>
+<img width="128" height="128" alt="Chrome" src="https://github.com/user-attachments/assets/e87f830b-ca04-4cc4-93bb-91212d3051b8" />
+<img width="128" height="128" alt="FF" src="https://github.com/user-attachments/assets/01b78ea6-42a7-44f4-8e13-30b00e29a4cd" />
 
 <h3>Supported userscript managers:</h3>
 <a href="https://www.tampermonkey.net/"><img src=https://avatars2.githubusercontent.com/u/767504?s=120&v=4></a>
